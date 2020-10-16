@@ -124,3 +124,20 @@ deleteButton.addEventListener('click', button => {
   calculator.delete()
   calculator.updateDisplay()
 })
+
+document.body.addEventListener('keydown', keyboardEvent => {
+  console.log('Event: ', keyboardEvent);
+  if (['0','1','2','3','4','5','6','7','8','9'].includes(keyboardEvent.key)) {
+    calculator.appendNumber(keyboardEvent.key)
+    calculator.updateDisplay()
+  }
+  if (['+','-','*','/',':'].includes(keyboardEvent.key)) {
+    const operation = ['/',':'].includes(keyboardEvent.key) ? '÷' : keyboardEvent.key;
+    calculator.chooseOperation(operation)
+    calculator.updateDisplay()
+  }
+  if (keyboardEvent.key.toLocaleLowerCase() === 'delete') {
+    calculator.clear()
+    calculator.updateDisplay()
+  }
+})
